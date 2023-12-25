@@ -1,0 +1,12 @@
+name: Setup Homebrew for cross compile
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        cd /opt
+        sudo mkdir homebrew
+        sudo chown $USER homebrew
+        curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+        mkdir homebrew/cache
+        cp "${{ github.action_path }}"/arm-brew-install /usr/local/bin
