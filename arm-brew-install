@@ -7,5 +7,6 @@ tag=arm64_ventura
 for formula in "$@"; do
   /opt/homebrew/bin/brew fetch --bottle-tag=$tag $formula
   sed -i'' -e 's/^  *check_prefix//g' /opt/homebrew/Library/Homebrew/install.rb # bypass prefix check
-  /opt/homebrew/bin/brew install $(/opt/homebrew/bin/brew --cache --bottle-tag=$tag $formula)
+  /opt/homebrew/bin/brew install --ignore-dependencies \
+    $(/opt/homebrew/bin/brew --cache --bottle-tag=$tag $formula)
 done
